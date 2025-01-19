@@ -24,7 +24,7 @@ wss.on('connection', (ws) => {
         room.clients.push(ws);
         room.participants.push(userName);
 
-        ws.send(JSON.stringify({ type: 'roomJoined', roomCode: roomCode, participants: room.participants }));
+        ws.send(JSON.stringify({ type: 'roomJoined', roomCode: roomCode, participants: room.participants, userName: userName }));
 
         room.clients.forEach(client => {
           if (client !== ws) {
@@ -58,8 +58,4 @@ wss.on('connection', (ws) => {
         }
     }
   });
-
-
- 
 });
-
