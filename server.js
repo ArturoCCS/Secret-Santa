@@ -11,50 +11,54 @@ wss.on('connection', (ws) => {
   console.log("Nuevo cliente conectado");
 
   ws.on('message', (message) => {
-    const { type, roomCode, content } = JSON.parse(message);
+    const { type, roomCode, userName } = JSON.parse(message);
 
     if (type === 'createRoom') {
       const newRoomCode = generateRoomCode();
-      rooms[newRoomCode] = [ws];  
-      ws.send(JSON.stringify({ type: 'roomCreated', roomCode: newRoomCode }));
-      console.log(`Sala creada con código: ${newRoomCode}`);
+      rooms[newRoomCode] = { clients: [ws], participants: [userName] }; 
+      ws.send(JSON.stringify({ type: 'roomCreated', roomCode: newRoomCode, userName }));
     } else if (type === 'joinRoom') {
       if (rooms[roomCode]) {
-        rooms[roomCode].push(ws);  
-        ws.send(JSON.stringify({ type: 'roomJoined', roomCode: roomCode }));
+        const room = rooms[roomCode];
 
-        rooms[roomCode].forEach(client => {
+        room.clients.push(ws);
+        room.participants.push(userName);
+
+        ws.send(JSON.stringify({ type: 'roomJoined', roomCode: roomCode, participants: room.participants }));
+
+        room.clients.forEach(client => {
           if (client !== ws) {
-            client.send(JSON.stringify({ type: 'newParticipant', message: 'Un nuevo participante se ha unido' }));
+              client.send(JSON.stringify({ type: 'newParticipant', message: userName }));
           }
         });
       } else {
         ws.send(JSON.stringify({ type: 'error', message: 'Sala no encontrada' }));
       }
-    }else if (type === 'newMessage') {
-      if (rooms[roomCode]) {
-        rooms[roomCode].forEach(client => {
-          if (client !== ws) {
-            client.send(JSON.stringify({ type: 'newMessage', message: `${content}` }));
-          }
-        });
-      }
     }
   });
 
   ws.on('close', () => {
-    for(let roomCode in rooms){
-      const index = rooms[roomCode].indexOf(ws);
-      if (index !== -1) {
-        rooms[roomCode].splice(index, 1);
-        console.log(`Cliente desconectado de la sala ${roomCode}`)
-        if(rooms[roomCode].length === 0){
-          delete rooms[roomCode];
+    for (let roomCode in rooms) {
+        const room = rooms[roomCode];
+        const clientIndex = room.clients.indexOf(ws);
+
+        if (clientIndex !== -1) {
+            const disconnectedUser = room.participants[clientIndex];
+            room.clients.splice(clientIndex, 1);
+            room.participants.splice(clientIndex, 1);
+
+            room.clients.forEach(client => {
+                client.send(JSON.stringify({ type: 'participantLeft', message: disconnectedUser }));
+            });
+
+            if (room.clients.length === 0) {
+                delete rooms[roomCode];
+            }
+            break;
         }
-        break;
-      }
     }
   });
+
 
  
 });

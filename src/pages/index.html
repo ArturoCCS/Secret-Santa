@@ -3,25 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
     <title>Juego de Sala</title>
 </head>
 <body>
-        <h1>Bienvenido al Juego de Sala</h1>
-
-    <div id="roomOptions">
-        <button id="createRoomBtn">Crear Sala</button>
-        <input type="text" id="joinRoomInput" placeholder="Código de Sala">
-        <button id="joinRoomBtn">Unirse a Sala</button>
-    </div>
-
-    <div id="roomInfo" style="display: none;">
-        <h2>Estás en la Sala: <span id="roomCode"></span></h2>
-        <div id="messages"></div>
-        <input type="text" id="messageInput" placeholder="Escribe un mensaje">
-        <button id="sendMessageBtn">Enviar</button>
-        <button id="sortear">Sortear</button>
-    </div>
-
-    <script src="../components/app.js"> </script>
+    <main class="main-content">
+        <header class="header-banner">
+            <h1 class="main-title">Amigo Secreto</h1>
+            <img src="../assets/amigo-secreto.png" alt="Imagen representativa de amigo secreto">
+        </header>
+        
+        <section class="input-section" id="roomOptions">
+            <h2 class="section-title">Unete o crea una sala para formar un amigo secreto</h2>
+           
+            <div class="input-wrapper">    
+                <button id="createRoomBtn">Crear Sala</button>
+                <input type="text" id="joinRoomInput" placeholder="Código de Sala">
+                <input type="text" id="name" class="input-name" placeholder="Escribe tu nombre">
+                <button id="joinRoomBtn">Unirse a Sala</button>
+            </div>
+        </section>
+    
+        <div id="roomInfo" style="display: none;">
+            <h2>Estás en la Sala: <span id="roomCode"></span></h2>
+            <h2>Bienvenido: <span id="userName"></span></h2>
+            <h2>Otros participantes: <div id="messages"></div></h2>
+            
+            <section class="input-section">
+                <h2 class="section-title">Preciona para descubrir a sus amigos secretos</h2>
+                
+                <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
+                <ul id="resultado" class="result-list" aria-live="polite"></ul>
+    
+                <div class="button-container">
+                    <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
+                        <img src="../assets//play_circle_outline.png" alt="Ícono para sortear">
+                        Sortear amigo
+                    </button>
+                </div>
+            </section>
+        </div>
+        
+    </main>
+    <script type="module" src="../components/app.js"></script>
 </body>
 </html>
