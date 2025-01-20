@@ -1,4 +1,5 @@
 import { showCreateRoomPopup, showJoinRoomPopup } from './popup.js';
+import { showWarningMessage } from './warningMessage.js';
 
 const ws = new WebSocket('ws://localhost:8080');
 
@@ -32,8 +33,7 @@ document.getElementById('createRoomBtn').addEventListener('click', () => {
     })
     .catch((error) => {
       if(error !== 'CANCELLED'){
-        console.error('Error al ingresar el nombre:', error);
-        alert('Ocurrió un error, por favor intenta de nuevo.');
+        showWarningMessage(error);
       }
     });
 });
@@ -49,8 +49,7 @@ document.getElementById('joinRoomBtn').addEventListener('click', () => {
     })
     .catch((error) => {
       if (error !== 'CANCELLED') {
-        console.error('Error al ingresar los datos:', error);
-        alert('Ocurrió un error, por favor intenta de nuevo.');
+        showWarningMessage(error);
       }
     });
 });
@@ -90,3 +89,4 @@ function deleteParticipant(userName) {
       participantsList.removeChild(userItem);
   }
 }
+
