@@ -1,8 +1,9 @@
+@import "images.css";
+
 :root {
     --color-primary: #c02351;
     --color-secondary: #FFF9EB;
     --color-tertiary: #C4C4C4;
-    --color-button: #cc1b23;
     --color-button-hover: #9a181f;
     --color-text: #444444;
     --color-text-secondary: #601e29;
@@ -25,6 +26,60 @@ body {
 }
 /*nav */
 
+.background-animation {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-animation: snowy 9s linear infinite;
+  -moz-animation: snowy 9s linear infinite;
+  -o-animation: snowy 9s linear infinite;
+  -ms-animation: snowy 9s linear infinite;
+  animation: snowy 9s linear infinite;
+}
+@-moz-keyframes snowy {
+  0% {
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+  }
+  75% {
+    background-position: 325px 750px, 275px 600px, -5px 150px;
+  }
+  100% {
+    background-position: 500px 1000px, 400px 800px, 0px 300px;
+  }
+}
+@-webkit-keyframes snowy {
+  0% {
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+  }
+  75% {
+    background-position: 325px 750px, 275px 600px, -5px 150px;
+  }
+  100% {
+    background-position: 500px 1000px, 400px 800px, 0px 300px;
+  }
+}
+@-o-keyframes snowy {
+  0% {
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+  }
+  75% {
+    background-position: 325px 750px, 275px 600px, -5px 150px;
+  }
+  100% {
+    background-position: 500px 1000px, 400px 800px, 0px 300px;
+  }
+}
+@keyframes snowy {
+  0% {
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+  }
+  75% {
+    background-position: 325px 750px, 275px 600px, -5px 150px;
+  }
+  100% {
+    background-position: 500px 1000px, 400px 800px, 0px 300px;
+  }
+}
 .nav-bar {
     color: var(--color-secondary); 
     padding: 10px 20px; 
@@ -104,27 +159,31 @@ body {
     flex-shrink: 0; /* Evita que la imagen se reduzca */
   }
   
+ img{
+  filter: drop-shadow(
+   0 0 10px rgba(0, 0, 0, 0.8)
+  );
+} 
   .img_santa {
     width: 20%;
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra de la imagen */
+    border-radius: 10px; 
+   
   }
 
   .img_writing_santa {
     width: 40%;
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra de la imagen */
+    border-radius: 10px; 
   }
   
   @media (max-width: 768px) {
     .header-banner {
-      flex-direction: column; /* Cambia la disposición a vertical */
-      align-items: center; /* Alinea al centro */
+      flex-direction: column; 
+      align-items: center; 
     }
   
     .banner-content {
-      margin-right: 0; /* Elimina margen en móviles */
-      margin-bottom: 20px; /* Añade espacio con la imagen */
+      margin-right: 0; 
+      margin-bottom: 20px; 
     }
   }
   
@@ -220,6 +279,11 @@ button {
     color: var(--color-text-secondary);
 }
 
+button:hover{
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
 
 /* Botón de sortear título */
 .button-draw {
@@ -228,7 +292,7 @@ button {
     width: 100%;
     padding: 10px 40px;
     color: var(--color-white);
-    background-color: var(--color-button);
+    background-color: var(--color-primary);
     font-size: 16px;
 }
 
@@ -252,7 +316,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; 
+    z-index: 100; 
 }
 
 .modal-content {
@@ -266,4 +330,73 @@ button {
     -moz-border-radius: 25px;
     -ms-border-radius: 25px;
     -o-border-radius: 25px;
+}
+
+.card {
+  width: 50%;
+  height: 65px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  background-color: var(--color-white);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 15px;
+  top: 10px;
+}
+.wave {
+  position: absolute;
+  transform: rotate(90deg);
+  left: -31px;
+  top: 32px;
+  width: 80px;
+  fill: #ffa30d3a;
+}
+.icon-container {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffa30d48;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+.icon {
+  width: 17px;
+  height: 17px;
+  color: #db970e;
+}
+.message-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+.message-text,
+.sub-text {
+  margin: 0;
+  cursor: default;
+}
+.message-text {
+  color: #db970e;
+  font-size: 17px;
+  font-weight: 700;
+}
+.sub-text {
+  font-size: 18px;
+  color: #555;
+  margin-top: 8px;
+}
+
+.cross-icon {
+  width: 28px;
+  height: 28px;
+  color: #555;
+  cursor: pointer;
 }
