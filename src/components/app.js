@@ -1,4 +1,4 @@
-import { showNamePopup } from './popup.js';
+import { showCreateRoomPopup, showJoinRoomPopup } from './popup.js';
 
 const ws = new WebSocket('ws://localhost:8080');
 
@@ -15,13 +15,15 @@ ws.onmessage = (event) => {
     addUser(data.userName);
   } else if (data.type === 'participantLeft') {
     deleteParticipant(data.disconnectedUser);
+  } else if (data.type === 'roomClosed'){
+    alert(data.message);
   } else if (data.type === 'error') {
     alert(data.message);
   }
 };
 
 document.getElementById('createRoomBtn').addEventListener('click', () => {
-  showNamePopup()
+  showCreateRoomPopup()
     .then((userName) => {
       if (userName) {
         const message = JSON.stringify({ type: 'createRoom', userName });
@@ -29,16 +31,28 @@ document.getElementById('createRoomBtn').addEventListener('click', () => {
       }
     })
     .catch((error) => {
-      console.error('Error al ingresar el nombre:', error);
-      alert('Ocurrió un error, por favor intenta de nuevo.');
+      if(error !== 'CANCELLED'){
+        console.error('Error al ingresar el nombre:', error);
+        alert('Ocurrió un error, por favor intenta de nuevo.');
+      }
     });
 });
 
 document.getElementById('joinRoomBtn').addEventListener('click', () => {
-  const roomCode = document.getElementById('joinRoomInput').value;
-  const userName = document.getElementById('name').value;
-  const message = JSON.stringify({ type: 'joinRoom', roomCode, userName });
-  ws.send(message);
+  showJoinRoomPopup()
+    .then(({ userName, roomCode }) => { 
+      if (userName && roomCode) { 
+        console.log(userName)
+        const message = JSON.stringify({ type: 'joinRoom', roomCode, userName });
+        ws.send(message);
+      }
+    })
+    .catch((error) => {
+      if (error !== 'CANCELLED') {
+        console.error('Error al ingresar los datos:', error);
+        alert('Ocurrió un error, por favor intenta de nuevo.');
+      }
+    });
 });
 
 function populateParticipants(data) {
@@ -61,7 +75,11 @@ function updateRoomInfo(data) {
   document.getElementById('roomCode').textContent = data.roomCode;
   document.getElementById('userName').textContent = data.userName;
   document.getElementById('roomOptions').style.display = 'none';
+  document.getElementById('primaryBanner').style.display = 'none';
   document.getElementById('roomInfo').style.display = 'block';
+  document.getElementById('roomBanner').style.display = 'flex';
+  document.getElementById('roomNavInfo').style.display = 'block';
+  
 }
 
 function deleteParticipant(userName) {
