@@ -28,7 +28,7 @@ wss.on('connection', (ws) => {
 
         room.clients.forEach(client => {
           if (client !== ws) {
-              client.send(JSON.stringify({ type: 'newParticipant', message: userName }));
+              client.send(JSON.stringify({ type: 'newParticipant', userName: userName }));
           }
         });
       } else {
