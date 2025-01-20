@@ -4,34 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
     <title>Juego de Sala</title>
 </head>
 <body>
     <main class="main-content">
-        <header class="header-banner">
-            <h1 class="main-title">Amigo Secreto</h1>
-            <img src="../assets/amigo-secreto.png" alt="Imagen representativa de amigo secreto">
+        <nav class="nav-bar"  id="roomNavInfo" style="display: none;">
+            <div class="nav-content">
+              <h2>Estás en la Sala: <span id="roomCode"></span></h2>
+              <h2>Bienvenido: <span id="userName"></span></h2>
+            </div>
+        </nav>
+          
+        <header class="header-banner" id="primaryBanner">
+            <h1 class="main-title">Amigo Secreto<span class="subtitle">¡Diviértete con tus amigos!</span></h1>
+
+            <img class="img_santa" src="../assets/santa_icon.png" alt="Imagen representativa de amigo secreto para sorteo de regalos">
         </header>
         
+        <header class="header-banner" id="roomBanner" style="display: none;">
+            <div class="banner-content">
+              <h2 class="participants-title">Otros Participantes:</h2>
+              <div id="messages" class="participants-list"></div>
+            </div>
+            <div class="banner-image">
+              <img class="img_writing_santa" src="../assets/writing_santa.png" alt="Imagen representativa de amigo secreto para sorteo de regalos">
+            </div>
+        </header>
+          
         <section class="input-section" id="roomOptions">
-            <h2 class="section-title">Unete o crea una sala para formar un amigo secreto</h2>
+            <h2 class="section-title">Únete o crea una sala para descrubrir a tu amigo secreto</h2>
            
             <div class="input-wrapper">    
-                <button id="createRoomBtn">Crear Sala</button>
-                <button id="joinRoomBtn">Unirse a Sala</button>
+                <button id="createRoomBtn" aria-label="Crear una sala para sorteo de Secret Santa">Crear Sala</button>
+                <button id="joinRoomBtn" aria-label="Unirse a una sala existente para sorteo de Secret Santa">Unirse a Sala</button>
             </div>
         </section>
+        
     
         <div id="roomInfo" style="display: none;">
-            <h2>Estás en la Sala: <span id="roomCode"></span></h2>
-            <h2>Bienvenido: <span id="userName"></span></h2>
-            <h2>Otros participantes: <div id="messages"></div></h2>
             
-            <section class="input-section">
-                <h2 class="section-title">Preciona para descubrir a sus amigos secretos</h2>
-                
-                <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
-                <ul id="resultado" class="result-list" aria-live="polite"></ul>
+            <section class="input-section" >
+                <h2 class="section-title">Preciona para descubrir a su amigos secretos</h2>
     
                 <div class="button-container">
                     <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
@@ -43,6 +57,8 @@
         </div>
         
     </main>
+
+    
     <script type="module" src="../components/app.js"></script>
 </body>
 </html>
