@@ -8,7 +8,7 @@ function generateRoomCode() {
 }
 
 wss.on('connection', (ws) => {
-  console.log("Nuevo cliente conectado");
+  let inactivityTimeout;
 
   ws.on('message', (message) => {
     const { type, roomCode, userName } = JSON.parse(message);
@@ -16,6 +16,9 @@ wss.on('connection', (ws) => {
     if (type === 'createRoom') {
       const newRoomCode = generateRoomCode();
       rooms[newRoomCode] = { clients: [ws], participants: [userName] }; 
+
+      inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600000);
+
       ws.send(JSON.stringify({ type: 'roomCreated', roomCode: newRoomCode, userName }));
     } else if (type === 'joinRoom') {
       if (rooms[roomCode]) {
@@ -23,6 +26,9 @@ wss.on('connection', (ws) => {
 
         room.clients.push(ws);
         room.participants.push(userName);
+
+        clearTimeout(inactivityTimeout);
+        inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600000);
 
         ws.send(JSON.stringify({ type: 'roomJoined', roomCode: roomCode, participants: room.participants, userName: userName }));
 
@@ -48,7 +54,7 @@ wss.on('connection', (ws) => {
             room.participants.splice(clientIndex, 1);
 
             room.clients.forEach(client => {
-                client.send(JSON.stringify({ type: 'participantLeft', message: disconnectedUser }));
+                client.send(JSON.stringify({ type: 'participantLeft', disconnectedUser: disconnectedUser }));
             });
 
             if (room.clients.length === 0) {
@@ -58,4 +64,14 @@ wss.on('connection', (ws) => {
         }
     }
   });
+
+  function closeRoom(roomCode) {
+    const room = rooms[roomCode];
+    if (room) {
+      room.clients.forEach(client => {
+        client.send(JSON.stringify({ type: 'roomClosed', message: 'La sala ha sido cerrada por inactividad.' }));
+      });
+      delete rooms[roomCode]; 
+    }
+  }
 });
