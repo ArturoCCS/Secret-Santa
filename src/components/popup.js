@@ -51,16 +51,20 @@ export function showJoinRoomPopup(){
             const userName = document.getElementById('name').value.trim();
             const roomCode = document.getElementById('joinRoomInput').value.trim();
 
-                if (userName ) {
+                if (userName) {
                     if(roomCode){
                         document.body.removeChild(modal);  
                         resolve({userName, roomCode}); 
                     }else{
-                        reject('No se ingresó un codigo');  
+                        reject('No se ingresó un codigo de sala');  
                         document.body.removeChild(modal);
                     }
-                } else {   
-                    reject('No se ingresó un nombre');  
+                } else {  
+                    if(roomCode){
+                        reject('No se ingresó un nombre');
+                    }else{
+                        reject('No se ingresó ningun dato');  
+                    }
                     document.body.removeChild(modal);
                 }
 
