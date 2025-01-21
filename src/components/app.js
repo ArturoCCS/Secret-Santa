@@ -3,7 +3,8 @@ import { addSessionCloseRoomMessage, addSessionSecretSanta, cleanSessionCurrentR
 import { showCloseRoomMessage, showWarningMessage } from './message.js';
 import { desativatedPopoup, showCreateRoomPopup, showJoinRoomPopup, showSecretSantaPopup } from './popup.js';
 
-const ws = new WebSocket('ws://localhost:8080');
+//local WebSocket('ws://localhost:8080')
+const ws = new WebSocket('wss://radial-curved-petroleum.glitch.me/');
 
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
