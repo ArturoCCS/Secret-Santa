@@ -98,3 +98,7 @@ El servidor se iniciará en `http://localhost:8080` o en el puerto configurado e
     ```
 
 5. Crea un pull request en este repositorio.
+
+## Demo 
+
+https://github.com/user-attachments/assets/1a59bf6b-aecb-4fbe-bf6e-fa50164b289e
