@@ -1,11 +1,12 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 }); 
+const wss = new WebSocket.Server({ port: 8080 });
 
-const rooms ={};
+const rooms = {};
 
 function generateRoomCode() {
   return Math.random().toString(36).substr(2, 6).toUpperCase();
 }
+
 function assignSecretSanta(room, ws) {
   const participants = room.participants;
 
@@ -47,18 +48,17 @@ function assignSecretSanta(room, ws) {
   });
 }
 
-
 wss.on('connection', (ws) => {
-  let inactivityTimeout;
-
   ws.on('message', (message) => {
     const { type, roomCode, userName } = JSON.parse(message);
 
     if (type === 'createRoom') {
       const newRoomCode = generateRoomCode();
-      rooms[newRoomCode] = { clients: [ws], participants: [userName] }; 
-
-      inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600);
+      rooms[newRoomCode] = {
+        clients: [ws],
+        participants: [userName],
+        inactivityTimeout: setTimeout(() => closeRoom(newRoomCode), 3600 * 1000), // 1 hora
+      };
 
       ws.send(JSON.stringify({ type: 'roomCreated', roomCode: newRoomCode, userName }));
     } else if (type === 'joinRoom') {
@@ -71,24 +71,22 @@ wss.on('connection', (ws) => {
         } else {
           room.clients.push(ws);
           room.participants.push(userName);
-  
-          clearTimeout(inactivityTimeout);
-          inactivityTimeout = setTimeout(() => closeRoom(roomCode), 360000);
-  
-          ws.send(JSON.stringify({ type: 'roomJoined', roomCode: roomCode, participants: room.participants, userName: userName }));
-  
+
+          clearTimeout(room.inactivityTimeout);
+          room.inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600 * 1000); // 1 hora
+
+          ws.send(JSON.stringify({ type: 'roomJoined', roomCode, participants: room.participants, userName }));
+
           room.clients.forEach(client => {
             if (client !== ws) {
-                client.send(JSON.stringify({ type: 'newParticipant', userName: userName }));
+              client.send(JSON.stringify({ type: 'newParticipant', userName }));
             }
           });
         }
-
-      }else {
+      } else {
         ws.send(JSON.stringify({ type: 'warning', message: 'Sala no encontrada' }));
       }
-    }else if (type === 'raffle'){
-     
+    } else if (type === 'raffle') {
       if (rooms[roomCode]) {
         const room = rooms[roomCode];
         assignSecretSanta(room, ws);
@@ -98,33 +96,39 @@ wss.on('connection', (ws) => {
 
   ws.on('close', () => {
     for (let roomCode in rooms) {
-        const room = rooms[roomCode];
-        const clientIndex = room.clients.indexOf(ws);
+      const room = rooms[roomCode];
+      const clientIndex = room.clients.indexOf(ws);
 
-        if (clientIndex !== -1) {
-            const disconnectedUser = room.participants[clientIndex];
-            room.clients.splice(clientIndex, 1);
-            room.participants.splice(clientIndex, 1);
+      if (clientIndex !== -1) {
+        const disconnectedUser = room.participants[clientIndex];
+        room.clients.splice(clientIndex, 1);
+        room.participants.splice(clientIndex, 1);
 
-            room.clients.forEach(client => {
-                client.send(JSON.stringify({ type: 'participantLeft', disconnectedUser: disconnectedUser }));
-            });
+        room.clients.forEach(client => {
+          client.send(JSON.stringify({ type: 'participantLeft', disconnectedUser }));
+        });
 
-            if (room.clients.length === 0) {
-                delete rooms[roomCode];
-            }
-            break;
+        if (room.clients.length === 0) {
+          clearTimeout(room.inactivityTimeout);
+          delete rooms[roomCode];
+        } else {
+          clearTimeout(room.inactivityTimeout);
+          room.inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600 * 1000);
         }
+
+        break;
+      }
     }
   });
 
   function closeRoom(roomCode) {
     const room = rooms[roomCode];
     if (room) {
+      clearTimeout(room.inactivityTimeout);
       room.clients.forEach(client => {
         client.send(JSON.stringify({ type: 'roomClosed', message: 'La sala ha sido cerrada por inactividad.' }));
       });
-      delete rooms[roomCode]; 
+      delete rooms[roomCode];
     }
   }
 });
