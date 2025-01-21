@@ -1,4 +1,5 @@
 import { createRoomView } from "./roomView.js";
+import { addSessionCurrentRoom } from './sessionStorage.js';
 
 export function addUser(userName, isCurrentUser) {
     const participantsList = document.getElementById('messages');
@@ -15,7 +16,8 @@ export function updateRoomInfo(data) {
     document.body.appendChild(createRoomView());
     document.getElementById('roomCode').textContent = data.roomCode;
     document.getElementById('userName').textContent = data.userName;
-    sessionStorage.setItem('currentRoom', data.roomCode);
+    addSessionCurrentRoom(data.roomCode)
+
 }
 
 export function populateParticipants(data) {
@@ -33,3 +35,4 @@ export function deleteParticipant(userName) {
         participantsList.removeChild(userItem);
     }
   }
+

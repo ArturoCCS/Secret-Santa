@@ -1,5 +1,5 @@
 import { createCard } from '../utility/card.js';
-import { cleanSessionRoom } from '../utility/cleanSessionStorage.js';
+import { cleanSessionRoom } from '../utility/sessionStorage.js';
 
 export function showWarningMessage(message){
         const card = createCard(message);
@@ -22,7 +22,7 @@ export function showCloseRoomMessage(message) {
     document.body.appendChild(card);
     document.getElementById('close').addEventListener('click', () => {
         document.body.removeChild(card);
-        cleanSessionRoom();
+        cleanSessionRoom();   
         window.location.reload();
     });
     

@@ -1,3 +1,5 @@
+import { cleanSessionSecretSanta } from '../utility/sessionStorage.js';
+
 export function showCreateRoomPopup() {
     return new Promise((resolve, reject) => {  
         const modal = document.createElement('div');
@@ -75,4 +77,36 @@ export function showJoinRoomPopup(){
             reject('CANCELLED');
           });
     });
+}
+
+export function showSecretSantaPopup(secretSanta){
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = `
+        <div class="modal-content center">
+            <p class="section-title">Amigo Secreto</p>
+            <img class="secretSantaIcon" src="../assets/santa_snowman_icon.png" alt="Imagen representativa de amigo secreto para sorteo de regalos">
+      
+            <p class="section-secret-santa">Felicidades tu amigo secreto es <span class="subtitle">¡${secretSanta}!</span></p>
+            
+            <button id="close">Cerrar</button>
+               
+        </div>    
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById('close').addEventListener('click', () => {
+      document.body.removeChild(modal);
+    });
+
+}
+
+
+export function desativatedPopoup(){
+    const activePopups = document.querySelectorAll('.modal'); 
+    activePopups.forEach(popup => {
+        popup.remove();
+    });
+    cleanSessionSecretSanta()
 }

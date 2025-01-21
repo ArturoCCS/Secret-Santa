@@ -26,7 +26,7 @@ export function createRoomView(){
                 <h2 class="section-title">Preciona para descubrir a su amigos secretos</h2>
     
                 <div class="button-container">
-                    <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
+                    <button class="button-draw" id="play" aria-label="Sortear amigo secreto">
                         <img src="../assets//play_circle_outline.png" alt="Ícono para sortear">
                         Sortear amigo
                     </button>
