@@ -16,7 +16,7 @@ export function createRoomView(){
               <div id="messages" class="participants-list"></div>
             </div>
             <div class="banner-image">
-              <img class="img_writing_santa" src="../assets/writing_santa.png" alt="Imagen representativa de amigo secreto para sorteo de regalos">
+              <img class="img_writing_santa" src="src/assets/writing_santa.png" alt="Imagen representativa de amigo secreto para sorteo de regalos">
             </div>
         </header>
 
@@ -27,7 +27,7 @@ export function createRoomView(){
     
                 <div class="button-container">
                     <button class="button-draw" id="play" aria-label="Sortear amigo secreto">
-                        <img src="../assets//play_circle_outline.png" alt="Ícono para sortear">
+                        <img src="src/assets//play_circle_outline.png" alt="Ícono para sortear">
                         Sortear amigo
                     </button>
                 </div>
