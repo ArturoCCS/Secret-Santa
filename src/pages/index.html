@@ -8,13 +8,8 @@
     <title>Amigo Secreto</title>
 </head>
 <body class="background-animation image-class">
-    <main class="main-content">
-        <nav class="nav-bar"  id="roomNavInfo" style="display: none;">
-            <div class="nav-content">
-              <h2>Estás en la Sala: <span id="roomCode"></span></h2>
-              <h2>Bienvenido: <span id="userName"></span></h2>
-            </div>
-        </nav>
+    <main class="main-content" id="preview">
+        
           
         <header class="header-banner" id="primaryBanner">
             <h1 class="main-title">Amigo Secreto<span class="subtitle">¡Diviértete con tus amigos!</span></h1>
@@ -22,15 +17,7 @@
             <img class="img_santa" src="../assets/santa_icon.png" alt="Imagen representativa de amigo secreto para sorteo de regalos">
         </header>
         
-        <header class="header-banner" id="roomBanner" style="display: none;">
-            <div class="banner-content">
-              <h2 class="participants-title">Otros Participantes:</h2>
-              <div id="messages" class="participants-list"></div>
-            </div>
-            <div class="banner-image">
-              <img class="img_writing_santa" src="../assets/writing_santa.png" alt="Imagen representativa de amigo secreto para sorteo de regalos">
-            </div>
-        </header>
+     
           
         <section class="input-section" id="roomOptions">
             <h2 class="section-title">Únete o crea una sala para descrubrir a tu amigo secreto</h2>
@@ -40,22 +27,6 @@
                 <button id="joinRoomBtn" aria-label="Unirse a una sala existente para sorteo de Secret Santa">Unirse a Sala</button>
             </div>
         </section>
-        
-    
-        <div id="roomInfo" style="display: none;">
-            
-            <section class="input-section" >
-                <h2 class="section-title">Preciona para descubrir a su amigos secretos</h2>
-    
-                <div class="button-container">
-                    <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
-                        <img src="../assets//play_circle_outline.png" alt="Ícono para sortear">
-                        Sortear amigo
-                    </button>
-                </div>
-            </section>
-        </div>
-        
     </main>
 
     

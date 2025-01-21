@@ -17,7 +17,7 @@ wss.on('connection', (ws) => {
       const newRoomCode = generateRoomCode();
       rooms[newRoomCode] = { clients: [ws], participants: [userName] }; 
 
-      inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600000);
+      inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600);
 
       ws.send(JSON.stringify({ type: 'roomCreated', roomCode: newRoomCode, userName }));
     } else if (type === 'joinRoom') {
@@ -28,7 +28,7 @@ wss.on('connection', (ws) => {
         room.participants.push(userName);
 
         clearTimeout(inactivityTimeout);
-        inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600000);
+        inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600);
 
         ws.send(JSON.stringify({ type: 'roomJoined', roomCode: roomCode, participants: room.participants, userName: userName }));
 
