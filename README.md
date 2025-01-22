@@ -71,6 +71,7 @@ The server will start at http://localhost:8080 or the port configured in your se
 |-- README.md          # Project documentation
 
 ```
+
 ## Notes
 
 - An active connection is required to participate in the draw.
