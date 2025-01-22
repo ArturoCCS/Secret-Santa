@@ -83,48 +83,26 @@ The server will start at http://localhost:8080 or the port configured in your se
 ## Contribution
 
 1. Fork the repository.
-    
+
 2. Create a branch for your feature or fix:
 
-        ```bash
-    
-        git checkout -b new-feature
-    
-        ```
-    
-      
-
-  
+    ```bash
+    git checkout -b new-feature
+    ```
 
 3. Make your changes and commit them:
 
-  
-
-    ```bash
-
-    git commit -m "Add new feature"
-
-    ```
-
-
-  
+    ```bash
+    git commit -m "Add new feature"
+    ```
 
 4. Push your changes to your repository:
 
-  
-  
-    ```bash
-
-    git push origin new-feature
-
-
-    ```
-
-
-  
+    ```bash
+    git push origin new-feature
+    ```
 
 5. Create a pull request in this repository.
-
 
 
 ## Demo
