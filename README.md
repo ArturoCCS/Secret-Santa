@@ -86,13 +86,13 @@ The server will start at http://localhost:8080 or the port configured in your se
     
 2. Create a branch for your feature or fix:
 
-    ```bash
-
-    git checkout -b new-feature
-
-    ```
-
-  
+        ```bash
+    
+        git checkout -b new-feature
+    
+        ```
+    
+      
 
   
 
