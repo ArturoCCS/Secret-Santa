@@ -84,7 +84,7 @@ export function showSecretSantaPopup(secretSanta) {
     modal.innerHTML = `
         <div class="modal-content center">
             <p class="section-title">Secret Santa</p>
-            <img class="secretSantaIcon" src="../assets/santa_snowman_icon.png" alt="Illustration for Secret Santa draw">
+            <img class="secretSantaIcon" src="src/assets/santa_snowman_icon.png" alt="Illustration for Secret Santa draw">
             <p class="section-secret-santa">Congratulations! Your Secret Santa is <span class="subtitle">¡${secretSanta}!</span></p>
             <button id="close">Close</button>
         </div>    
