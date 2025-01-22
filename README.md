@@ -27,7 +27,7 @@ This application allows for easy and quick "Secret Santa" draws. Users can join 
 1. Clone this repository:
 
     ```bash
-    git clone <repository-URL>
+    git clone https://github.com/ArturoCCS/Secret-Santa.git
     cd <project-name>
     ```
 
@@ -85,11 +85,13 @@ The server will start at http://localhost:8080 or the port configured in your se
     
 2. Create a branch for your feature or fix:
 
-    ```bash
+    ```
 
-    git checkout -b nueva-funcionalidad
+    git checkout -b new-feature
 
     ```
+
+  
 
   
 
@@ -97,23 +99,26 @@ The server will start at http://localhost:8080 or the port configured in your se
 
   
 
-    ```bash
+    ```
 
-    git commit -m "Añade nueva funcionalidad"
+    git commit -m "Add new feature"
 
     ```
+
 
   
 
 4. Push your changes to your repository:
 
   
+  
+    ```
 
-    ```bash
+    git push origin new-feature
 
-    git push origin nueva-funcionalidad
 
     ```
+
 
   
 
