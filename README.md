@@ -1,105 +1,126 @@
 # Secret Santa Web App
 
-## Descripción
+## Description
 
-Esta aplicación permite realizar sorteos de "Amigo Secreto" de manera fácil y rápida. Los usuarios pueden unirse a una sala, donde se asignan los amigos secretos de forma aleatoria. La app está diseñada para evitar que un usuario se asigne a sí mismo como su amigo secreto.
+This application allows for easy and quick "Secret Santa" draws. Users can join a room where secret friends are assigned randomly. The app is designed to ensure that no user is assigned to themselves as their secret friend.
 
-## Características
+## Features
 
-- Los usuarios se conectan a través de una sala con un código único.
-- Mensajes en tiempo real utilizando WebSockets.
-- Validación de que al menos 3 participantes estén presentes antes de realizar el sorteo.
-- Garantía de que ningún participante se asigna a sí mismo como amigo secreto.
-- Capacidad para manejar eventos como la unión de nuevos participantes y el cierre automático de popups.
+- Users connect through a room with a unique code.
+- Real-time messaging using WebSockets.
+- Validation to ensure at least 3 participants are present before starting the draw.
+- Guarantees that no participant is assigned to themselves.
+- Handles events such as new participants joining and the automatic closure of popups.
 
-## Tecnologías Utilizadas
+## Technologies Used
 
-- **Node.js**: Servidor principal.
-- **WebSocket**: Para la comunicación en tiempo real.
-- **HTML/CSS/JavaScript**: Interfaz de usuario.
+- **Node.js**: Main server.
+- **WebSocket**: For real-time communication.
+- **HTML/CSS/JavaScript**: User interface.
 
-## Requisitos
+## Requirements
 
-- Node.js (versión 14 o superior).
+- Node.js (version 14 or higher).
 
-## Instalación
+## Installation
 
-1. Clona este repositorio:
+1. Clone this repository:
 
+    ```bash
+    git clone <repository-URL>
+    cd <project-name>
     ```
-    git clone <URL-del-repositorio>
-    cd <nombre-del-proyecto>
-    ```
 
-2. Instala las dependencias necesarias:
+2. Install the required dependencies:
 
-    ```
+    ```bash
     npm install
     ```
 
-## Ejecución
+## Execution
 
-Para ejecutar el proyecto localmente, utiliza el siguiente comando:
+To run the project locally, use the following command:
 
 ```
 node server.js
 ```
 
-El servidor se iniciará en `http://localhost:8080` o en el puerto configurado en tu archivo `server.js`.
+The server will start at http://localhost:8080 or the port configured in your server.js file.
 
-## Uso
+## Usage
 
-1. Inicia el servidor con `node server.js`.
-2. Abre el archivo `index.html` con la extensión Live Server en Visual Studio Code. Esto iniciará el servidor local automáticamente y abrirá la página en tu navegador.
-3. Los usuarios pueden:
-    - Crear una sala y compartir el código con otros participantes.
-    - Ingresar el código de sala para unirse.
-    - Iniciar el sorteo una vez que al menos 3 participantes estén presentes.
-4. A cada usuario se le mostrará un popup con el nombre de su amigo secreto.
+1. Start the server with `node server.js`.
+2. Open the `index.html` file with the Live Server extension in Visual Studio Code. This will automatically start the local server and open the page in your browser.
+3. Users can:
+    - Create a room and share the code with other participants.
+    - Enter a room code to join.
+    - Start the draw once at least 3 participants are present.
+4. Each user will see a popup showing their secret friend’s name.
 
-## Estructura del Proyecto
+## Project Structure
 
 
 
 ```
-|-- server.js          # Archivo principal del servidor
-|-- src/            # Archivos estáticos (HTML, CSS, JS)
-|-- package.json       # Información y dependencias del proyecto
-|-- README.md          # Documentación del proyecto
+|-- server.js          # Main server file
+
+|-- src/             # Static files (HTML, CSS, JS)
+
+|-- package.json       # Project information and dependencies
+
+|-- README.md          # Project documentation
+
 ```
+## Notes
 
-## Notas
+- An active connection is required to participate in the draw.
+- To start a draw, at least 3 users must be connected. Anyone who clicks the button will trigger the popup for all participants. Once the draw is activated, clicking will display the secret friend of the user who clicked.
+- Popups close automatically when a new user joins the room, clearing previous values if a draw was conducted earlier to avoid errors.
+- A warning message is displayed if a username is already taken, as well as warnings for events like the room closing due to inactivity after a set time (adjustable in the code) or when the room code is not found.
+- (There are no deep validations, such as detailed checks on the username).
 
-- Es necesario tener una conexión activa para participar en el sorteo.
-- Para iniciar un sorteo se necesitan al menos 3 usuarios conectados. Cualquiera que presione el botón activará el popup para todos. Una vez activado el sorteo, al presionar se mostrará el amigo secreto del usuario que presionó el botón.
-- Los popups se cierran automáticamente cuando un nuevo usuario se une a la sala, eliminando los valores si es que se realizó un sorteo anterior, para evitar errores.
-- Se envía un mensaje de advertencia si un nombre de usuario ya está ocupado, además de advertencias como el cierre de la sala por inactividad después de un tiempo (ajustable en el código) y si el código de sala no se encuentra.
-- (No existen validaciones tan profundas como verificar detalladamente el nombre de usuario).
+## Contribution
 
-## Contribuir
+1. Fork the repository.
+    
+2. Create a branch for your feature or fix:
 
-1. Haz un fork del repositorio.
-2. Crea una rama para tu función o corrección:
+    ```
 
-    ```
-    git checkout -b nueva-funcionalidad
-    ```
+    git checkout -b nueva-funcionalidad
 
-3. Realiza tus cambios y confirma:
+    ```
 
-    ```
-    git commit -m "Añade nueva funcionalidad"
-    ```
+  
 
-4. Sube los cambios a tu repositorio:
+3. Make your changes and commit them:
 
-    ```
-    git push origin nueva-funcionalidad
-    ```
+  
 
-5. Crea un pull request en este repositorio.
+    ```
 
-## Demo 
+    git commit -m "Añade nueva funcionalidad"
+
+    ```
+
+  
+
+4. Push your changes to your repository:
+
+  
+
+    ```
+
+    git push origin nueva-funcionalidad
+
+    ```
+
+  
+
+5. Create a pull request in this repository.
+
+
+
+## Demo
 
 https://github.com/user-attachments/assets/1a59bf6b-aecb-4fbe-bf6e-fa50164b289e
-
