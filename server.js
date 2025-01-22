@@ -1,4 +1,4 @@
-//forma local
+// Local version
 
 // const WebSocket = require('ws');
 // const wss = new WebSocket.Server({ port: 8080 });
@@ -13,34 +13,34 @@
 //   const participants = room.participants;
 
 //   if (participants.length < 3) {
-//     ws.send(JSON.stringify({ type: 'warning', message: 'Debe haber al menos 3 personas para hacer el sorteo.' }));
+//     ws.send(JSON.stringify({ type: 'warning', message: 'At least 3 people are required to start the draw.' }));
 //     return;
 //   }
 
 //   let shuffledParticipants;
 //   let isValid = false;
 
-//   // Repetir hasta que se genere un barajado válido
+//   // Repeat until a valid shuffle is generated
 //   while (!isValid) {
 //     shuffledParticipants = [...participants];
 
-//     // Barajar los participantes de forma aleatoria
+//     // Shuffle participants randomly
 //     for (let i = shuffledParticipants.length - 1; i > 0; i--) {
 //       const j = Math.floor(Math.random() * (i + 1));
 //       [shuffledParticipants[i], shuffledParticipants[j]] = [shuffledParticipants[j], shuffledParticipants[i]];
 //     }
 
-//     // Verificar que nadie se asigna a sí mismo
+//     // Verify that no one is assigned to themselves
 //     isValid = shuffledParticipants.every((participant, index) => participant !== participants[index]);
 //   }
 
-//   // Asignar a cada participante un amigo secreto
+//   // Assign each participant a secret friend
 //   const assignments = {};
 //   for (let i = 0; i < participants.length; i++) {
 //     assignments[participants[i]] = shuffledParticipants[i];
 //   }
 
-//   // Enviar la asignación a cada cliente
+//   // Send the assignment to each client
 //   room.clients.forEach(client => {
 //     const userName = room.participants[room.clients.indexOf(client)];
 //     client.send(JSON.stringify({
@@ -59,7 +59,7 @@
 //       rooms[newRoomCode] = {
 //         clients: [ws],
 //         participants: [userName],
-//         inactivityTimeout: setTimeout(() => closeRoom(newRoomCode), 3600 * 1000), // 1 hora
+//         inactivityTimeout: setTimeout(() => closeRoom(newRoomCode), 3600 * 1000), // 1 hour
 //       };
 
 //       ws.send(JSON.stringify({ type: 'roomCreated', roomCode: newRoomCode, userName }));
@@ -69,13 +69,13 @@
 //         const userInRoom = room.participants.some(participant => participant === userName);
 
 //         if (userInRoom) {
-//           ws.send(JSON.stringify({ type: 'warning', message: 'Este nombre ya está ocupado en la sala' }));
+//           ws.send(JSON.stringify({ type: 'warning', message: 'This username is already taken in the room.' }));
 //         } else {
 //           room.clients.push(ws);
 //           room.participants.push(userName);
 
 //           clearTimeout(room.inactivityTimeout);
-//           room.inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600 * 1000); // 1 hora
+//           room.inactivityTimeout = setTimeout(() => closeRoom(roomCode), 3600 * 1000); // 1 hour
 
 //           ws.send(JSON.stringify({ type: 'roomJoined', roomCode, participants: room.participants, userName }));
 
@@ -86,7 +86,7 @@
 //           });
 //         }
 //       } else {
-//         ws.send(JSON.stringify({ type: 'warning', message: 'Sala no encontrada' }));
+//         ws.send(JSON.stringify({ type: 'warning', message: 'Room not found.' }));
 //       }
 //     } else if (type === 'raffle') {
 //       if (rooms[roomCode]) {
@@ -128,7 +128,7 @@
 //     if (room) {
 //       clearTimeout(room.inactivityTimeout);
 //       room.clients.forEach(client => {
-//         client.send(JSON.stringify({ type: 'roomClosed', message: 'La sala ha sido cerrada por inactividad.' }));
+//         client.send(JSON.stringify({ type: 'roomClosed', message: 'The room has been closed due to inactivity.' }));
 //       });
 //       delete rooms[roomCode];
 //     }
