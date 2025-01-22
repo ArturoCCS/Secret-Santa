@@ -1,7 +1,7 @@
 import { addUser, deleteParticipant, populateParticipants, updateRoomInfo } from '../utility/roomManager.js';
 import { addSessionCloseRoomMessage, addSessionSecretSanta, cleanSessionCurrentRoom, cleanSessionRoom, cleanSessionSecretSanta } from '../utility/sessionStorage.js';
 import { showCloseRoomMessage, showWarningMessage } from './message.js';
-import { desativatedPopoup, showCreateRoomPopup, showJoinRoomPopup, showSecretSantaPopup } from './popup.js';
+import { deactivatePopup, showCreateRoomPopup, showJoinRoomPopup, showSecretSantaPopup } from './popup.js';
 
 //local WebSocket('ws://localhost:8080')
 const ws = new WebSocket('wss://radial-curved-petroleum.glitch.me/');
@@ -20,7 +20,7 @@ ws.onmessage = (event) => {
     activatePlay();
   } else if (data.type === 'newParticipant') {
     addUser(data.userName);
-    desativatedPopoup();
+    deactivatePopup();
   } else if (data.type === 'participantLeft') {
     deleteParticipant(data.disconnectedUser);
     cleanSessionRoom();
