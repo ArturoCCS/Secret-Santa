@@ -4,7 +4,7 @@ import { addSessionCurrentRoom } from './sessionStorage.js';
 export function addUser(userName, isCurrentUser) {
     const participantsList = document.getElementById('messages');
     const userItem = document.createElement('p');
-    userItem.textContent = isCurrentUser ? 'Tu' : userName;
+    userItem.textContent = isCurrentUser ? `${userName} (Me)`: userName;
     userItem.setAttribute('data-username', userName);
     
     if (isCurrentUser) userItem.classList.add('current-user');
