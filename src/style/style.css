@@ -10,7 +10,6 @@
     --color-white: #FFFFFF;
 }
 
-/* Estilos generales */
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +23,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-/*nav */
 
 .background-animation {
   width: 100%;
@@ -122,7 +120,6 @@ body {
     width: 100%;
 }
 
-/* Banner */
 .header-banner {
     flex: 40%;
     display: flex;
@@ -131,18 +128,15 @@ body {
     padding: 20px 0 0;
 }
 
-
-
-
   .banner-content {
     flex: 1;
     margin: 0 200px;
   }
   
   .participants-title {
-    font-size: 1.5rem; /* Tamaño del título */
-    margin-bottom: 10px; /* Separación del título y la lista */
-    color: var(--color-white); /* Color del texto */
+    font-size: 1.5rem; 
+    margin-bottom: 10px; 
+    color: var(--color-white); 
   }
   
   .participants-list {
@@ -156,7 +150,7 @@ body {
   }
   
   .banner-image {
-    flex-shrink: 0; /* Evita que la imagen se reduzca */
+    flex-shrink: 0; 
   }
   
  img{
@@ -187,7 +181,6 @@ body {
     }
   }
   
-/* Sección de entrada */
 .input-section {
     flex: 60%;
     background-color: var(--color-secondary);
@@ -201,7 +194,6 @@ body {
     margin-top: 30px;
 }
 
-/* Títulos */
 .main-title {
     font-size: 58px;
     font-family: "Merriweather", serif;
@@ -226,7 +218,6 @@ body {
     text-align: center;
 }
 
-/* Contenedores de entrada y botón */
 .input-wrapper {
     display: flex;
     justify-content: center;
@@ -254,7 +245,6 @@ body {
     margin-top: 30px;
 }
 
-/* Estilos de entrada de texto */
 .input-title {
     flex: 1;
     padding: 10px 15px;
@@ -266,7 +256,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos de botón */
+
 button {
     padding: 15px 30px;
     font-family: "Inter", sans-serif;
@@ -285,7 +275,6 @@ button:hover{
 }
 
 
-/* Botón de sortear título */
 .button-draw {
     display: flex;
     align-items: center;
@@ -304,8 +293,6 @@ button:hover{
     background-color: var(--color-button-hover);
 }
 
-
-/* Estilos básicos para el modal */
 .modal {
     position: fixed;
     top: 0;
