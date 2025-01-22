@@ -85,7 +85,7 @@ The server will start at http://localhost:8080 or the port configured in your se
     
 2. Create a branch for your feature or fix:
 
-    ```
+    ```bash
 
     git checkout -b new-feature
 
@@ -99,7 +99,7 @@ The server will start at http://localhost:8080 or the port configured in your se
 
   
 
-    ```
+    ```bash
 
     git commit -m "Add new feature"
 
@@ -112,7 +112,7 @@ The server will start at http://localhost:8080 or the port configured in your se
 
   
   
-    ```
+    ```bash
 
     git push origin new-feature
 
